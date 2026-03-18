@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<title>Riddler</title>
+<style>
+  body { text-align:center; background:#111; color:white; font-family:sans-serif; }
+  input { padding:10px; font-size:18px; }
+  button { padding:10px 20px; font-size:18px; cursor:pointer; }
+  #content { display:none; margin-top:20px; }
+  #countdown { font-size:24px; color:red; margin-top:20px; }
+</style>
+</head>
+<body>
+
+<h1>Riddle me this...</h1>
+<p>What does a liar do when he's dead?</p>
+
+<input type="password" id="pass">
+<button onclick="checkPassword()">Solve</button>
+
+<div id="countdown"></div>
+
+<div id="content">
+  <h2>You solved it.</h2>
+  <p>The truth will be revealed soon...</p>
+</div>
+
+<script>
+var countdownTime = 10;
+var countdownElement = document.getElementById("countdown");
+
+function startCountdown() {
+  countdownElement.innerHTML = "Revealing in: " + countdownTime + "s";
+  var interval = setInterval(function() {
+    countdownTime--;
+    countdownElement.innerHTML = "Revealing in: " + countdownTime + "s";
+    if(countdownTime <= 0) {
+      clearInterval(interval);
+      countdownElement.style.display = "none";
+      document.getElementById("content").style.display = "block";
+    }
+  }, 1000);
+}
+
+function checkPassword() {
+  var password = document.getElementById('pass').value;
+  if(password === 'liesstill') {
+    startCountdown();
+  } else {
+    alert('Wrong answer.');
+  }
+}
+</script>
+
+</body>
+</html>
